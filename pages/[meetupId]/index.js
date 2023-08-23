@@ -22,7 +22,7 @@ function MeetupDetails(props) {
 }
 
 export async function getStaticPaths() {
-  //Connect to Database
+  //Connect to our Database
   const client = await MongoClient.connect(
     "mongodb+srv://admin:KbIRBR8Zdg19y3KW@cluster0.u8pwtsg.mongodb.net/meetups?retryWrites=true&w=majority"
   );
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
   client.close();
 
   return {
-    fallback: false,
+    fallback: "blocking",
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
